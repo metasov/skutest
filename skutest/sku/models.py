@@ -70,5 +70,5 @@ class Item(models.Model):
                     settings.SKU_DIGITS_COUNT,
                     1)
             self.sku = settings.SKU_SEPARATOR.join(
-                (sku_prefix,sku_num))
+                (sku_prefix, sku_num))
         super(Item, self).save(*args, **kwargs)
