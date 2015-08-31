@@ -50,7 +50,7 @@ class Item(models.Model):
             sku_brand = self.brand.name.upper()
             sku_brand = sku_brand[:settings.SKU_BRAND_CHARACTERS]
             sku_prefix = settings.SKU_SEPARATOR.join(
-                (sku_category, sku.brand))
+                (sku_category, sku_brand))
             try:
                 max_sku_item = (
                     Item.objects
@@ -64,8 +64,11 @@ class Item(models.Model):
                     max_sku_item.sku[sku_num_start:])
                 sku_num = "{1:0>{0}}".format(
                     settings.SKU_DIGITS_COUNT,
-                    max_sku + 1
-                    )
+                    max_sku + 1)
             except IndexError:
-                sku_num = "0"*settings.SKU_DIGITS_COUNT
+                sku_num = "{1:0>{0}}".format(
+                    settings.SKU_DIGITS_COUNT,
+                    1)
+            self.sku = settings.SKU_SEPARATOR.join(
+                (sku_prefix,sku_num))
         super(Item, self).save(*args, **kwargs)
