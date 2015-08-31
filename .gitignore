@@ -1,3 +1,4 @@
 *.pyc
 /skutest/skutest/settings_local.py
 /skutest/db.sqlite3
+/static
