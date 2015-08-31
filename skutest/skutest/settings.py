@@ -103,4 +103,6 @@ STATIC_URL = '/static/'
 try:
     from settings_local import *
 except ImportError:
-    sys.stderr.write("Warning: Cannot import settings_local, using default configuration\n")
+    sys.stderr.write(
+        "Warning: Cannot import settings_local, using default configuration\n"
+        )
