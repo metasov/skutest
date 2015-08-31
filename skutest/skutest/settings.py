@@ -36,7 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'sku'
+    'sku',
+    'web'
 )
 
 MIDDLEWARE_CLASSES = (
