@@ -46,8 +46,8 @@ class Item(models.Model):
         if not self.sku:
             sku_prefix = settings.SKU_SEPARATOR.join(
                 (
-                    self.category.name[:settings.SKU_CATEGORY_CHARACTERS],
-                    self.brand.name[:settings.SKU_BRAND_CHARACTERS]
+                    self.category.name[:settings.SKU_CATEGORY_CHARACTERS].upper(),
+                    self.brand.name[:settings.SKU_BRAND_CHARACTERS].upper()
                     )
                 )
             try:
