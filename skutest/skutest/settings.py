@@ -101,6 +101,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# SKU-SPCEIFIC CONSTANTS
+
+SKU_BRAND_CHARACTERS = 2
+SKU_CATEGORY_CHARACTERS = 2
+SKU_SEPARATOR = "_"
+SKU_DIGITS_COUNT = 5
+
 try:
     from settings_local import *
 except ImportError:
