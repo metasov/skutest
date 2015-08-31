@@ -21,10 +21,11 @@ class Category(models.Model):
     class Meta:
         ordering = ('name', )
 
+
 class Item(models.Model):
     brand = models.ForeignKey(Brand, related_name="items")
     category = models.ForeignKey(Category, related_name="items")
-    name = models.CharField(max_length = 80)
+    name = models.CharField(max_length=80)
     sku = models.CharField(
         max_length=(
             3 * len(settings.SKU_SEPARATOR) +
@@ -44,15 +45,15 @@ class Item(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.sku:
+            sku_category = self.category.name.upper()
+            sku_category = sku_category[:settings.SKU_CATEGORY_CHARACTERS]
+            sku_brand = self.brand.name.upper()
+            sku_brand = sku_brand[:settings.SKU_BRAND_CHARACTERS]
             sku_prefix = settings.SKU_SEPARATOR.join(
-                (
-                    self.category.name[:settings.SKU_CATEGORY_CHARACTERS].upper(),
-                    self.brand.name[:settings.SKU_BRAND_CHARACTERS].upper()
-                    )
-                )
+                (sku_category, sku.brand))
             try:
-                max_sku_item = (Item
-                    .objects
+                max_sku_item = (
+                    Item.objects
                     .filter(sku__startswith=sku_prefix)
                     .order_by("-sku")[0])
                 sku_num_start = (
