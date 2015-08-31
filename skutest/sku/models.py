@@ -13,6 +13,7 @@ class Category(models.Model):
 class Item(models.Model):
     brand = models.ForeignKey(Brand, related_name="items")
     category = models.ForeignKey(Category, related_name="items")
+    name = models.CharField(max_length = 80)
     sku = models.CharField(
         max_length=(
             3 * len(settings.SKU_SEPARATOR) +
