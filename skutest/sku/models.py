@@ -8,12 +8,18 @@ class Brand(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        ordering = ('name', )
+
 
 class Category(models.Model):
     name = models.CharField(max_length=80, blank=False)
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        ordering = ('name', )
 
 class Item(models.Model):
     brand = models.ForeignKey(Brand, related_name="items")
@@ -32,6 +38,9 @@ class Item(models.Model):
 
     def __unicode__(self):
         return "{0} ({1})".format(self.sku, self.name)
+
+    class Meta:
+        ordering = ('sku', )
 
     def save(self, *args, **kwargs):
         if not self.sku:
