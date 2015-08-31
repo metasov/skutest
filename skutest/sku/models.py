@@ -5,10 +5,15 @@ from django.conf import settings
 class Brand(models.Model):
     name = models.CharField(max_length=80, blank=False)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Category(models.Model):
     name = models.CharField(max_length=80, blank=False)
 
+    def __unicode__(self):
+        return self.name
 
 class Item(models.Model):
     brand = models.ForeignKey(Brand, related_name="items")
@@ -24,6 +29,9 @@ class Item(models.Model):
         blank=True,
         default=""
         )
+
+    def __unicode__(self):
+        return "{0} ({1})".format(self.sku, self.name)
 
     def save(self, *args, **kwargs):
         if not self.sku:
