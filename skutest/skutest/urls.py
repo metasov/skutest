@@ -18,5 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r"^sku/", include("sku.urls")),
-    url(r"", "web.views.main"),
+    url(r"^$", "web.views.main"),
 ]
